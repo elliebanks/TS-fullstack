@@ -6,8 +6,8 @@ const ChirpCard = ({ chirp }) => {
     <>
       <div className="card col-lg-10 text-center shadow">
         <div className="card-body">
-          <h5 className="card-title">{chirp.user}</h5>
-          <p className="card-text">{chirp.message}</p>
+          <h5 className="card-title">{chirp.name}</h5>
+          <p className="card-text">{chirp.content}</p>
           <Link to={`/details/${chirp.id}`} className="card-link">
             Details
           </Link>

@@ -1,5 +1,5 @@
 export interface IChirp {
     id: string;
-    user: string;
-    message: string;
+    name: string;
+    content: string;
 }

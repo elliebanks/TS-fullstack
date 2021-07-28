@@ -1,5 +1,6 @@
 import * as mysql from 'mysql';
 import Chirpr from './chirpr';
+import Users from './users';
 
 const Connection = mysql.createConnection({
     host: 'localhost',
@@ -19,5 +20,6 @@ export const Query = (query: string, values?: Array<string | number>) => {
 };
 
 export default {
-    Chirpr
+    Chirpr,
+    Users
 }

@@ -3,14 +3,14 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { IChirp } from '../utils/types';
 
-const Admin: React.FC<AdminProps> = () => {
+const Admin = () => {
 
     const history = useHistory();
     const { id } = useParams<{ id: string }>();
 
-    const [chirp, setChirp] = useState<IChirp>({ id: id, user: '', message: ''});
-    const [user, setUser] = useState<string>('');
-    const [message, setMessage] = useState<string>('');
+    const [chirp, setChirp] = useState<IChirp>({ id: id, name: '', content: ''});
+    const [name, setName] = useState<string>('');
+    const [content, setContent] = useState<string>('');
 
     const editChirp = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -18,7 +18,7 @@ const Admin: React.FC<AdminProps> = () => {
         let res = await fetch(`/api/chirps/${id}`, {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ user, message })
+            body: JSON.stringify({ name, content })
         });
         if (res.ok) {
             history.push('/');
@@ -44,42 +44,43 @@ const Admin: React.FC<AdminProps> = () => {
         (async () => {
             let res = await fetch(`/api/chirps/${id}`);
             let chirp = await res.json();
-            setUser(chirp.user);
-            setMessage(chirp.message);
+            setChirp(chirp);
         }) ();
-    }, [id]);
+    }, []);
 
     return (
-        <main className="container">
+        <main className="container d-flex justify-content-center w-75 bg-light">
             <section>
                 <div>
-                    <form>
-                        <label htmlFor="user">Username</label>
+                    <form className="d-flex flex-column">
+                        {/* <label htmlFor="user">Username</label> */}
                         <input
-                            value={user}
-                            onChange={(e) => setUser(e.target.value)}
-                            placeholder="Username"
-                            id="user"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder={chirp.name}
+                            id="name"
                             type="text"
                             className="form-control"
+                            
                         />
-                        <label htmlFor="text">Message</label>
+                        {/* <label htmlFor="text">Message</label> */}
                         <textarea
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            id="message"
-                            className="form-control"
+                            value={content}
+                            onChange={(e) => setContent(e.target.value)}
+                            placeholder = {chirp.content}
+                            id="content"
+                            className="form-control mb-3"
                         />
-                        <button
+                        <button type="button"
                             onClick={editChirp}
-                            className="form-control"
+                            className="mb-3 btn btn-primary btn-sm"
 
                         >
                             Edit Chirp!
                         </button>
-                        <button
+                        <button type="button"
                             onClick={deleteChirp}
-                            className="form-control"
+                            className="btn btn-primary btn-sm"
 
                         >
                             Delete Chirp!
@@ -88,22 +89,11 @@ const Admin: React.FC<AdminProps> = () => {
                 </div>
             </section>
         </main>
+    );
+};
 
-
-
-
-
-
-
-    )
-
-
-
-
-}
-
-interface AdminProps {
+// interface AdminProps {
     
-}
+// }
 
 export default Admin;

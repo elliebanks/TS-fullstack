@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ChirpCard from "./ChirpCard";
-//import Details from "./Details";
 //import Compose from "./Compose";
 
 const Home: React.FC<HomeProps> = () => {
@@ -19,14 +18,14 @@ const Home: React.FC<HomeProps> = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="container w-50">
         <h3 className="">Chirper!</h3>
         <Link to="/compose">
           <button className="btn btn-primary">Create a Chirp!</button>
         </Link>
       </div>
       <br />
-      <div className="container">
+      <div className="container w-25">
         <div className="row justify-content-center">
           {chirps.map((chirp) => (
             <ChirpCard key={chirp.id} chirp={chirp} />
