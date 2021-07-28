@@ -1,7 +1,7 @@
 import * as mysql from 'mysql';
 import Chirpr from './chirpr';
 
-export const Connection = mysql.createConnection({
+const Connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
     user: 'chirprapp',
